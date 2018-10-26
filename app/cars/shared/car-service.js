@@ -21,13 +21,12 @@ function carService() {
         throw new Error("Use .getInstance() instead of new");
     }
 
-    this._car = [];
+    this._cars = [];
     carService._instance = this;
 
     this.load = function () {
         return new Observable((subscriber) => {
             const carsCollection = firebase.firestore().collection("cars");
-            console.log(carsCollection);
             carsCollection.onSnapshot((snapshot) => {
                 const res = this._handleSnapshot(snapshot);
                 subscriber.next(res);
@@ -62,14 +61,8 @@ function carService() {
 
     this._handleSnapshot = function (data) {
         this._cars = [];
-
-        if (data) {
-            for (const id in data) {
-                if (data.hasOwnProperty(id)) {
-                    this._cars.push(new Car(data[id]));
-                }
-            }
-        }
+        
+        data.forEach(docSnap => this._cars.push(new Car(docSnap.data())));
 
         return this._cars;
     };
@@ -86,7 +79,7 @@ carService.getInstance = function () {
 carService._instance = new carService();
 
 function cloneUpdateModel(car) {
-    return editableProperties.reduce((prev, current) => (prev[current] = car[current], prev), {}) 
+    return editableProperties.reduce((prev, current) => (prev[current] = car[current], prev), {});
 }
 
 module.exports = carService;

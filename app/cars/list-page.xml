@@ -10,7 +10,7 @@
 
     <GridLayout class="page-content">
 
-        <lv:RadListView items="{{ cars }}" itemTap="onCarItemTap" class="list-group">
+        <lv:RadListView items="{{ cars }}" itemTap="onItemTap" class="list-group">
             <lv:RadListView.listViewLayout>
                 <lv:ListViewLinearLayout scrollDirection="Vertical" />
             </lv:RadListView.listViewLayout>
