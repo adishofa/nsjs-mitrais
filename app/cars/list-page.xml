@@ -1,0 +1,64 @@
+<Page class="page" navigatingTo="onNavigatingTo" navigatingFrom="onNavigatingFrom"
+    xmlns:lv="nativescript-ui-listview"
+    xmlns="http://schemas.nativescript.org/tns.xsd" >
+
+    <ActionBar class="action-bar">
+        <!-- Should remove the navigation button -->
+        <NavigationButton ios:visibility="collapsed" />
+        <Label class="action-bar-title" text="Home Cars" horizontalAlignment="center" />
+    </ActionBar>
+
+    <GridLayout class="page-content">
+
+        <lv:RadListView items="{{ cars }}" itemTap="onCarItemTap" class="list-group">
+            <lv:RadListView.listViewLayout>
+                <lv:ListViewLinearLayout scrollDirection="Vertical" />
+            </lv:RadListView.listViewLayout>
+
+            <lv:RadListView.itemTemplate>
+                <StackLayout class="list-group-item">
+
+                    <GridLayout rows="*, *, *" columns="*, *" class="list-group-item-content">
+                        <Label text="{{ name }}" class="text-primary font-weight-bold" />
+                        <Label col="1" horizontalAlignment="right" class="list-group-item-text m-r-5">
+                            <FormattedString>
+                                <Span text="€" />
+                                <Span text="{{ price }}" />
+                                <Span text="/day" />
+                            </FormattedString>
+                        </Label>
+
+                        <StackLayout row="1" class="hr-light m-t-5 m-b-5" colSpan="2" />
+
+                        <Image row="2" src="{{ imageUrl }}" stretch="aspectFill" height="120" class="m-r-20" />
+
+                        <StackLayout row="2" col="1" verticalAlignment="center" class="list-group-item-text">
+                            <Label class="p-b-10">
+                                <FormattedString ios:fontFamily="system">
+                                    <Span text="&#xf1b9;   " class="fa text-primary" />
+                                    <Span text="{{ class }}" />
+                                </FormattedString>
+                            </Label>
+                            <Label class="p-b-10">
+                                <FormattedString ios:fontFamily="system">
+                                    <Span text="&#xf085;   " class="fa text-primary" />
+                                    <Span text="{{ transmission }}" />
+                                    <Span text=" Transmission" />
+                                </FormattedString>
+                            </Label>
+                            <Label class="p-b-10">
+                                <FormattedString ios:fontFamily="system">
+                                    <Span text="&#xf2dc;   " class="fa text-primary" />
+                                    <Span text="{{ hasAC ? 'Yes' : 'No' }}" />
+                                </FormattedString>
+                            </Label>
+                        </StackLayout>
+                    </GridLayout>
+
+                </StackLayout>
+            </lv:RadListView.itemTemplate>
+        </lv:RadListView>
+
+        <ActivityIndicator busy="{{ isLoading }}" />
+    </GridLayout>
+</Page>

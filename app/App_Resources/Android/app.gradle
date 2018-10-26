@@ -1,0 +1,35 @@
+// Add your native dependencies here:
+
+// Uncomment to add recyclerview-v7 dependency
+//dependencies {
+//	compile 'com.android.support:recyclerview-v7:+'
+//}
+
+android {  
+  defaultConfig {  
+    generatedDensities = []
+    applicationId = "org.nativescript.NativeScriptJS" 
+    
+    // fix issue multiDex
+    multiDexEnabled true
+    //override supported platforms
+    // ndk {
+    //       abiFilters.clear()
+    //   		abiFilters "armeabi-v7a"
+ 		// }
+  
+  }  
+  aaptOptions {  
+    additionalParameters "--no-version-vectors"  
+  }
+
+  // fix issue outofmemory
+  dexOptions {
+    javaMaxHeapSize "4g"
+  }
+
+  // fix failed include.gradle 
+  project.ext {
+    googlePlayServicesVersion = "16.0.1"
+  }
+} 
