@@ -1,0 +1,30 @@
+//Font icon
+.fa {
+   font-family: "FontAwesome";
+}
+//Action bar
+.action-item,
+NavigationButton {
+    color: $ab-color;
+}
+
+.action-item:disabled {
+    color: rgba($ab-color, 0.5);
+}
+
+Slider {
+  background-color: $accent;
+  color: $accent;
+}
+
+.text {
+    color: $blue-dark;
+}
+
+.text-primary {
+    color: $accent-dark;
+}
+
+.text-secondary {
+    color: $blue-50;
+}

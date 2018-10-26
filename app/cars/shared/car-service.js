@@ -27,9 +27,9 @@ function carService() {
     this.load = function () {
         return new Observable((subscriber) => {
             const carsCollection = firebase.firestore().collection("cars");
-
+            console.log(carsCollection);
             carsCollection.onSnapshot((snapshot) => {
-                const res = this._handleSnapshot(snapshot.value);
+                const res = this._handleSnapshot(snapshot);
                 subscriber.next(res);
             })
         }).pipe(catchError(this._handleErrors));
