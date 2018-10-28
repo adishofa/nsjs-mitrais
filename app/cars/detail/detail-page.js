@@ -18,7 +18,7 @@ function onEditButtonTap(args) {
     const bindingContext = args.object.bindingContext;
 
     topmost().navigate({
-        moduleName: "",
+        moduleName: "cars/edit/edit-page",
         context: bindingContext,
         animated: true,
         transition: {
