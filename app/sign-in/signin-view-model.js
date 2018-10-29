@@ -9,6 +9,7 @@ function signinViewModel() {
         password: "tester1234",
         confirmPassword: "",
         isLoggingIn: true,
+        _userService: userService.getInstance(),
         toggleForm: function () {
             this.isLoggingIn = !this.isLoggingIn;
         },
@@ -27,17 +28,14 @@ function signinViewModel() {
         },
 
         login: function () {
-            userService.login({
+            this._userService.login({
                 email: this.email,
                 password: this.password
             }).then(() => {
-                topmost().navigate({
-                    moduleName: "cars/list-page",
-                    clearHistory: true
-                })
+                topmost().navigate("cars/list-page");
             })
             .catch((err) => {
-                alert("Unfortunately we could not find your account.");
+                alert("Unfortunately we could not find your account." + err);
             });
         },
 
@@ -69,7 +67,7 @@ function signinViewModel() {
             })
             .then((data) => {
                 if (data.result) {
-                    userService.resetPassword(data.text.trim())
+                    this._userService.resetPassword(data.text.trim())
                         .then(() => {
                             alert("Your password was successfully reset. Please check your email address.");
                         })

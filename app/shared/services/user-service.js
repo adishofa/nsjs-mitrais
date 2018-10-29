@@ -1,7 +1,5 @@
-const catchError = require("rxjs/operators").catchError;
-const Observable = require("rxjs").Observable;
 const throwError = require("rxjs").throwError;
-const firebase = require("nativescript-plugin-firebase/app");
+const firebase = require("nativescript-plugin-firebase");
 
 
 function userService() {
@@ -54,7 +52,7 @@ function userService() {
     }
 
     this._handleErrors = function (error) {
-        return throwError(error);
+        console.log(error);
     }
 }
 

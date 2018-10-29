@@ -1,3 +1,4 @@
+const frameModule = require("ui/frame");
 const init = require("nativescript-plugin-firebase").init;
 const config = require("./config");
 
@@ -5,10 +6,15 @@ const config = require("./config");
 init({
     persist: false,
     storageBucket: config.firebaseBucket,
+
+    // listener auth state change
     onAuthStateChanged: function(data) {
         console.log(data.loggedIn ? "Signed in firebase" : "Not Yet Sign");
         if (data.loggedIn) {
-            console.log("usermail : " + (data.user.email ? data.user.email : "N/A"));
+            frameModule.getFrameById("topmost").navigate({
+                moduleName: "cars/list-page",
+                clearHistory: true
+            });
         }
     }
 }).then(() => console.log("firebase.init done"),

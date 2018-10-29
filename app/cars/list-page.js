@@ -22,7 +22,7 @@ function onNavigatingFrom(args) {
 }
 
 function onItemTap(args) {
-    const tappedItem = args.view.bindingContext;
+    const tappedItem = args.view.bindingContext; // error when backbutton (tap) on screen
 
     topmost().navigate({
         moduleName: "cars/detail/detail-page",
@@ -36,6 +36,21 @@ function onItemTap(args) {
     });
 }
 
+function onLogoutTap() {
+    let viewModel = new listViewModel();
+    viewModel.logout();
+    topmost().navigate({
+        moduleName: "sign-in/signin-page",
+        animated: true,
+        transition: {
+            name: "slideTop",
+            duration: 200,
+            curve: "ease"
+        }
+    });
+}
+
 exports.onNavigatingTo = onNavigatingTo;
 exports.onNavigatingFrom = onNavigatingFrom;
 exports.onItemTap = onItemTap;
+exports.onLogoutTap = onLogoutTap;
