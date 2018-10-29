@@ -6,7 +6,7 @@
     <FlexboxLayout class="page">
         <StackLayout class="form">
             <Image class="logo" src="~/images/logo.png"></Image>
-            <Label class="header" text="APP NAME"></Label>
+            <Label class="header" text="NativeScript"></Label>
 
             <StackLayout class="input-field">
                 <TextField class="input" 

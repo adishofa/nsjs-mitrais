@@ -39,7 +39,10 @@ function carService() {
         const addedModel = cloneUpdateModel(carModel);
         const carsCollection = firebase.firestore().collection("cars");
 
-        return carsCollection.doc(carModel.id).set(addedModel);
+        return carsCollection.doc(carModel.id).set(addedModel)
+        .then(() => {
+            console.log(`cars ${carModel.id} is added`);
+        });
     };
 
     this.update = function (carModel) {

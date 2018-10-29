@@ -5,8 +5,8 @@ const topmost = require("ui/frame").topmost;
 
 function signinViewModel() {
     const viewModel = fromObject({
-        email: "adihafiduh@gmail.com",
-        password: "tester1234",
+        email: "",
+        password: "",
         confirmPassword: "",
         isLoggingIn: true,
         _userService: userService.getInstance(),

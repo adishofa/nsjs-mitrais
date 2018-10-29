@@ -1,15 +1,12 @@
 const topmost = require("ui/frame").topmost;
 const alert = require("ui/dialogs").alert;
 
-const editViewModel = require("./edit-view-model");
+const addViewModel = require("./adding-view-model");
+const viewModel = new addViewModel()
 
-function onNavigatingTo(args) {
-    if (args.isBackNavigation) {
-        return;
-    }
-
+function pageLoaded(args) {
     const page = args.object;
-    page.bindingContext = new editViewModel(page.navigationContext);
+    page.bindingContext = viewModel;
 }
 
 function onCancelButtonTap(args) {
@@ -20,7 +17,7 @@ function onDoneButtonTap(args) {
     const actionItem = args.object;
     const bindingContext = actionItem.bindingContext;
 
-    bindingContext.saveChanges()
+    bindingContext.saveAdding()
         .then(() => topmost().navigate({
             moduleName: "cars/list-page",
             animated: true,
@@ -33,7 +30,7 @@ function onDoneButtonTap(args) {
         }))
         .catch((err) => alert({
             title: "Sorry,",
-            message: err,
+            message: err.message,
             okButtonText: "Ok"
         }));
 }
@@ -64,7 +61,7 @@ function onImageAddRemoveTap(args) {
     bindingContext.onImageAddRemove();
 }
 
-exports.onNavigatingTo = onNavigatingTo;
+exports.pageLoaded = pageLoaded;
 exports.onCancelButtonTap = onCancelButtonTap;
 exports.onDoneButtonTap = onDoneButtonTap;
 exports.onSelectorTap = onSelectorTap;

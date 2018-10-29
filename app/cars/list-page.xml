@@ -63,5 +63,16 @@
         </lv:RadListView>
 
         <ActivityIndicator busy="{{ isLoading }}" />
+
+
+        <AbsoluteLayout tap="onFabTap" marginTop="87%" marginLeft="80%">
+            <StackLayout class="fab-button">
+                <GridLayout rows="2, auto" horizontalAlignment="center" class="fab-icon">
+                    <Label row="1" class="fab-dash--1" />
+                    <Label row="1" class="fab-dash--2" />
+                </GridLayout>
+            </StackLayout>
+        </AbsoluteLayout>
+        
     </GridLayout>
 </Page>

@@ -5,6 +5,8 @@ function onNavigatingTo(args) {
     const page = args.object;
 
     let viewModel = page.bindingContext;
+
+    // next handle this backbuttonnavigation 
     if (!args.isBackNavigation) {
         viewModel = new listViewModel();
         page.bindingContext = viewModel;
@@ -39,18 +41,34 @@ function onItemTap(args) {
 function onLogoutTap() {
     let viewModel = new listViewModel();
     viewModel.logout();
+    setTimeout( function () {
+        topmost().navigate({
+            moduleName: "sign-in/signin-page",
+            animated: true,
+            transition: {
+                name: "slideTop",
+                duration: 200,
+                curve: "ease"
+            }
+        });
+    }, 1000);
+    
+}
+
+function onFabTap() {
     topmost().navigate({
-        moduleName: "sign-in/signin-page",
+        moduleName: "cars/add/adding-page",
         animated: true,
         transition: {
             name: "slideTop",
-            duration: 200,
-            curve: "ease"
+            duration: 100,
+            curve: "easeOut"
         }
-    });
+    })
 }
 
 exports.onNavigatingTo = onNavigatingTo;
 exports.onNavigatingFrom = onNavigatingFrom;
 exports.onItemTap = onItemTap;
 exports.onLogoutTap = onLogoutTap;
+exports.onFabTap = onFabTap;
