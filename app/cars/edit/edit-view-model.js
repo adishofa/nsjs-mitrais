@@ -4,6 +4,10 @@ const { knownFolders, path } = require("tns-core-modules/file-system");
 const { fromAsset } = require("tns-core-modules/image-source");
 const imagePicker = require("nativescript-imagepicker");
 
+// helper pipe
+const roundingValueConverter = require("./roundingValueConverter");
+const visibilityValueConverter = require("./visibilityValueConverter");
+
 const carService = require("../shared/car-service");
 
 const tempImageFolderName = "nsimagepicker";
@@ -14,6 +18,8 @@ function editViewModel(carModel) {
         isUpdating: false,
         _carService: carService.getInstance(),
         _isImageDirty: false,
+        roundingValueConverter: roundingValueConverter,
+        visibilityValueConverter: visibilityValueConverter,
 
         saveChanges: function () {
             let queue = Promise.resolve();
@@ -25,10 +31,14 @@ function editViewModel(carModel) {
                     .then(() => {
                         const localFullPath = this.car.imageUrl;
                         const remoteFullPath = this.car.imageStoragePath;
-                        return this._carService.uploadImage(remoteFullPath);
+
+                        return this._carService.uploadImage(remoteFullPath, localFullPath);
                     })
                     .then((uploadedFile) => {
-                        this.car.imageUrl = uploadedFile;
+                        return this._carService.getUploadUrl(this.car.imageStoragePath, `gs://${uploadedFile.bucket}/`)
+                    })
+                    .then((url) => {
+                        this.car.imageUrl = url;
                         this._isImageDirty = false;
                     })
             }

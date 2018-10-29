@@ -2,6 +2,7 @@ const catchError = require("rxjs/operators").catchError;
 const Observable = require("rxjs").Observable;
 const throwError = require("rxjs").throwError;
 const firebase = require("nativescript-plugin-firebase/app");
+const firebaseNative = require("nativescript-plugin-firebase");
 
 const Car = require("./car-model");
 
@@ -52,10 +53,17 @@ function carService() {
     };
 
     this.uploadImage = function (remoteFullPath, localFullPath) {
-        return firebase.storage.uploadFile({
+        return firebaseNative.storage.uploadFile({
             localFullPath,
             remoteFullPath,
             onProgress: null
+        });
+    };
+
+    this.getUploadUrl = function (remoteFullPath, bucket) {
+        return firebaseNative.storage.getDownloadUrl({
+            bucket,
+            remoteFullPath
         });
     };
 

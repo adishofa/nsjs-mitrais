@@ -19,7 +19,7 @@ function onEditButtonTap(args) {
 
     topmost().navigate({
         moduleName: "cars/edit/edit-page",
-        context: bindingContext,
+        context: bindingContext.car,
         animated: true,
         transition: {
             name: "slideTop",

@@ -3,8 +3,6 @@ const Observable = require("rxjs").Observable;
 const throwError = require("rxjs").throwError;
 const firebase = require("nativescript-plugin-firebase");
 
-const User = require("./user-model");
-
 
 function userService() {
     if (userService._instance) {

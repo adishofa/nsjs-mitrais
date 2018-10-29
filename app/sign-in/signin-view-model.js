@@ -1,40 +1,87 @@
 const fromObject = require("data/observable").fromObject;
-const ObservableArray = require("data/observable-array").ObservableArray;
-const finalize = require("rxjs/operators").finalize;
+const dialogModule = require("ui/dialogs");
+const userService = require("~/shared/services/user-service");
+const topmost = require("ui/frame").topmost;
 
-const carService = require("../cars/shared/car-service");
-
-function listViewModel() {
+function signinViewModel() {
     const viewModel = fromObject({
-        cars: new ObservableArray([]),
-        isLoading: false,
+        email: "adihafiduh@gmail.com",
+        password: "tester1234",
+        confirmPassword: "",
+        isLoggingIn: true,
+        toggleForm: function () {
+            this.isLoggingIn = !this.isLoggingIn;
+        },
 
-        _carService: carService.getInstance(),
-        _subscription: null,
+        submit: function () {
+            if (this.email.trim() === "" || this.password.trim() === "") {
+                alert("please provide both an email address and password.");
+                return;
+            }
 
-        load: function () {
-            if (!this._subscription) {
-                this.set("isLoading", true);
-
-                this._subscription = this._carService.load()
-                    .pipe(finalize(() => this.set("isLoading", false)))
-                    .subscribe((cars) => {
-                        this.set("cars", new ObservableArray(cars));
-                        this.set("isLoading", false);
-                    });
+            if (this.isLoggingIn) {
+                this.login();
+            } else {
+                this.register();
             }
         },
 
-        unload: function () {
-            if (this._subscription) {
-                this._subscription.unsubscribe();
-                this._subscription = null;
-            }
+        login: function () {
+            userService.login({
+                email: this.email,
+                password: this.password
+            }).then(() => {
+                topmost().navigate({
+                    moduleName: "cars/list-page",
+                    clearHistory: true
+                })
+            })
+            .catch((err) => {
+                alert("Unfortunately we could not find your account.");
+            });
+        },
+
+        register: function () {
+            // if (this.password != this.confirmPassword) {
+            //     alert("Your passwords do not match.");
+            //     return;
+            // }
+            // userService.register({
+            //     email: this.email,
+            //     password: this.password
+            // }).then(() => {
+                alert("Your account was successfully created. you can now login.");
+                this.isLoggingIn = true;
+            // })
+            // .catch(() => {
+            //     alert("Unfortunately we were unable to create your account.");
+            // });
+        },
+
+        forgotPassword: function () {
+            dialogModule.prompt({
+                title: "Forgot Password",
+                message: "Enter the email address you used to register for APP NAME to reset your password.",
+                inputType: "email",
+                defaultText: "",
+                okButoonText: "Ok",
+                cancelButtonText: "Cancel"
+            })
+            .then((data) => {
+                if (data.result) {
+                    userService.resetPassword(data.text.trim())
+                        .then(() => {
+                            alert("Your password was successfully reset. Please check your email address.");
+                        })
+                        .catch(() => {
+                            alert("Unfortunately, an error occured resetting your password.");
+                        })
+                }
+            });
         }
     });
 
     return viewModel;
-
 }
 
-module.exports = listViewModel;
+module.exports = signinViewModel;

@@ -31,9 +31,9 @@ function onDoneButtonTap(args) {
                 curve: "ease"
             }
         }))
-        .catch(() => alert({
+        .catch((err) => alert({
             title: "Sorry,",
-            message: "Something went wrong, please try again.",
+            message: err.message,
             okButtonText: "Ok"
         }));
 }
