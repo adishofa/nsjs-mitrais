@@ -32,10 +32,43 @@ function onDoneButtonTap(args) {
             }
         }))
         .catch((err) => alert({
-            title: "Sorry,",
+            title: "Sorry, ",
             message: err,
             okButtonText: "Ok"
         }));
+}
+
+function onDeleteButtonTap(args) {
+    const actionItem = args.object;
+    const bindingContext = actionItem.bindingContext;
+
+    const confirmOptions = {
+        title: "Delete",
+        message: "Do You want to deleting this item?",
+        okButtonText: "Ok",
+        cancelButtonText: "Cancel"
+    };
+    confirm(confirmOptions)
+        .then((result) => {
+            if (result) {
+                bindingContext.deleteItem()
+                    .then(() => topmost().navigate({
+                        moduleName: "cars/list-page",
+                        animated: true,
+                        clearHistory: true,
+                        transition: {
+                            name: "slideBottom",
+                            duration: 200,
+                            curve: "ease"
+                        }
+                    }))
+                    .catch((err) => alert({
+                        title: "Sorry, ",
+                        message: err.message,
+                        okButtonText: "Ok"
+                    }));
+            }
+        });
 }
 
 function onSelectorTap(args) {
@@ -67,5 +100,6 @@ function onImageAddRemoveTap(args) {
 exports.onNavigatingTo = onNavigatingTo;
 exports.onCancelButtonTap = onCancelButtonTap;
 exports.onDoneButtonTap = onDoneButtonTap;
+exports.onDeleteButtonTap = onDeleteButtonTap;
 exports.onSelectorTap = onSelectorTap;
 exports.onImageAddRemoveTap = onImageAddRemoveTap;

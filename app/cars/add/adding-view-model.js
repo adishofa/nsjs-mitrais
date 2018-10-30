@@ -12,9 +12,9 @@ const carService = require("../shared/car-service");
 
 const tempImageFolderName = "nsimagepicker";
 const carModel = {
-    id: "car7",
+    id: "",
     name: "",
-    hasAC: true,
+    hasAC: Boolean(true),
     description: "",
     seats: "2",
     luggage: Number("2"),
@@ -22,8 +22,8 @@ const carModel = {
     doors: Number("2"),
     price: Number("0"),
     transmission: "Manual",
-    imageUrl: "cars/Mercedes S-Class Cabriolet.jpg",
-    imageStoragePath: "https://firebasestorage.googleapis.com/v0/b/nativescriptjs.appspot.com/o/cars%2FMercedes%20S-Class%20Cabriolet.jpg?alt=media&token=c3df450c-c4ba-4409-ab62-88520529014a",
+    imageUrl: "https://firebasestorage.googleapis.com/v0/b/nativescriptjs.appspot.com/o/cars%2FMercedes%20S-Class%20Cabriolet.jpg?alt=media&token=c3df450c-c4ba-4409-ab62-88520529014a",
+    imageStoragePath: "",
     isModelValid: false
 };
 
@@ -38,6 +38,7 @@ function addViewModel() {
 
         saveAdding: function () {
             let queue = Promise.resolve();
+            let randID = Math.floor(Math.random()*1000).toString();
 
             this.set("isUpdating", true);
 
@@ -45,12 +46,14 @@ function addViewModel() {
                 queue = queue
                     .then(() => {
                         const localFullPath = this.car.imageUrl;
-                        const remoteFullPath = this.car.imageStoragePath;
+                        const remoteFullPath = `cars/${this.car.name}.jpg`;
+                        this.car.set("imageStoragePath", remoteFullPath);
+                        this.car.set("id", `car${randID}`);
 
                         return this._carService.uploadImage(remoteFullPath, localFullPath);
                     })
                     .then((uploadedFile) => {
-                        return this._carService.getUploadUrl(this.car.imageStoragePath, `gs://${uploadedFile.bucket}/`)
+                        return this._carService.getUploadUrl(`cars/${this.car.name}.jpg`, `gs://${uploadedFile.bucket}/`)
                     })
                     .then((url) => {
                         this.car.imageUrl = url;

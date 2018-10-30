@@ -29,8 +29,8 @@ function onDoneButtonTap(args) {
             }
         }))
         .catch((err) => alert({
-            title: "Sorry,",
-            message: err.message,
+            title: "Sorry, ",
+            message: err,
             okButtonText: "Ok"
         }));
 }

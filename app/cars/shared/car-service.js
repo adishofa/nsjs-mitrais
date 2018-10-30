@@ -17,6 +17,20 @@ const editableProperties = [
     "class"
 ];
 
+const addedProperties = [
+    "doors",
+    "imageStoragePath",
+    "id",
+    "hasAC",
+    "imageUrl",
+    "luggage",
+    "name",
+    "price",
+    "seats",
+    "transmission",
+    "class"
+];
+
 function carService() {
     if (carService._instance) {
         throw new Error("Use .getInstance() instead of new");
@@ -36,7 +50,7 @@ function carService() {
     }
 
     this.add = function (carModel) {
-        const addedModel = cloneUpdateModel(carModel);
+        const addedModel = cloneAddedModel(carModel);
         const carsCollection = firebase.firestore().collection("cars");
 
         return carsCollection.doc(carModel.id).set(addedModel)
@@ -54,6 +68,15 @@ function carService() {
             console.log(`cars ${carModel.id} is updates`);
         });
     };
+
+    this.delete = function (carModel) {
+        const carDoc = firebase.firestore().collection("cars").doc(carModel.id);
+
+        return carDoc.delete()
+            .then(() => {
+                console.log(`cars ${carModel.id} is deleted`);
+            })
+    }
 
     this.uploadImage = function (remoteFullPath, localFullPath) {
         return firebaseNative.storage.uploadFile({
@@ -91,6 +114,10 @@ carService._instance = new carService();
 
 function cloneUpdateModel(car) {
     return editableProperties.reduce((prev, current) => (prev[current] = car[current], prev), {});
+}
+
+function cloneAddedModel(car) {
+    return addedProperties.reduce((prev, current) => (prev[current] = car[current], prev), {});
 }
 
 module.exports = carService;

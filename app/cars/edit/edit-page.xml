@@ -3,6 +3,9 @@
     xmlns="http://schemas.nativescipt.org/tns.xsd">
     <ActionBar class="action-bar">
         <NavigationButton visibility="collapsed" />
+        <ActionItem tap="onDeleteButtonTap" ios.position="left" android.position="left">
+            <Label text="Delete" verticalAlignment="center" class="action-item" />
+        </ActionItem>
         <Label class="action-bar-title" text="Edit Details" horizontalAlignment="center" />
         <ActionItem tap="onCancelButtonTap" ios.position="left" android.position="left">
             <Label text="Cancel" verticalAlignment="center" class="action-item" />

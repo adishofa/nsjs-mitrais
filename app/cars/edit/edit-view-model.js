@@ -52,6 +52,19 @@ function editViewModel(carModel) {
                 });
         },
 
+        deleteItem: function () {
+            let queue = Promise.resolve();
+            this.set("isUpdating", true);
+
+            return queue
+                .then(() => this._carService.delete(this.car))
+                .then(() => this.set("isUpdating", false))
+                .catch((err) => {
+                    this.set("isUpdating", false);
+                    throw err;
+                });
+        },
+
         onImageAddRemove: function () {
             if (this.car.imageUrl) {
                 this._handleImageChange(null);
