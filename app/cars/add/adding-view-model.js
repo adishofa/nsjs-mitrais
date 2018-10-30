@@ -38,7 +38,7 @@ function addViewModel() {
 
         saveAdding: function () {
             let queue = Promise.resolve();
-            let randID = Math.floor(Math.random()*1000).toString();
+            let randID = Math.floor(Math.random()*10000).toString();
 
             this.set("isUpdating", true);
 

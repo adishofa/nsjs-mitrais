@@ -6,7 +6,6 @@ function onNavigatingTo(args) {
 
     let viewModel = page.bindingContext;
 
-    // next handle this backbuttonnavigation 
     if (!args.isBackNavigation) {
         viewModel = new listViewModel();
         page.bindingContext = viewModel;
@@ -24,8 +23,12 @@ function onNavigatingFrom(args) {
 }
 
 function onItemTap(args) {
-    const tappedItem = args.view.bindingContext; // error when backbutton (tap) on screen
+    const page = args.object;
+    const tapViewModel = page.bindingContext;
+    const tappedItem = tapViewModel._map.cars._array[args.index]; 
 
+    // console.log(tappedItem); // check correct access object's property
+    
     topmost().navigate({
         moduleName: "cars/detail/detail-page",
         context: tappedItem,
