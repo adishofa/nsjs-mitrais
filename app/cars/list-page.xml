@@ -6,9 +6,6 @@
         <!-- Should remove the navigation button -->
         <NavigationButton ios:visibility="collapsed" />
         <Label class="action-bar-title" text="Home Cars" horizontalAlignment="center" />
-        <ActionItem tap="onLogoutTap" ios.position="right" android.position="right">
-            <Label text="Logout" verticalAlignment="center" class="action-item" />
-        </ActionItem>
     </ActionBar>
 
     <GridLayout class="page-content">

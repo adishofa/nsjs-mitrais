@@ -1,0 +1,60 @@
+<nsDrawer:RadSideDrawer id="sideDrawer" xmlns:nsDrawer="nativescript-ui-sidedrawer" loaded="onLoaded">
+	<nsDrawer:RadSideDrawer.drawerTransition>
+		<nsDrawer:SlideInOnTopTransition/>
+	</nsDrawer:RadSideDrawer.drawerTransition>
+
+	<nsDrawer:RadSideDrawer.drawerContent>
+		<GridLayout rows="auto, *" class="sidedrawer sidedrawer-left">
+			<StackLayout class="sidedrawer-header">
+				<Label class="sidedrawer-header-image fa" text="&#xf2bd;" />
+				<Label class="sidedrawer-header-brand" text="User Name" />
+				<Label class="footnote" text="username@mail.com" />
+			</StackLayout>
+
+			<ScrollView row="1">
+				<StackLayout class="sidedrawer-content">
+					<GridLayout columns="auto, *" class="sidedrawer-list-item"
+					 title="Home" >
+						<Label row="0" col="0" text="&#xf015;" class="fa" />
+						<Label row="0" col="1" text="Home" class="p-r-10" />
+					</GridLayout>
+
+					<GridLayout columns="auto, *" class="sidedrawer-list-item"
+					 title="Browse" >
+						<Label row="0" col="0" text="&#xf1ea;" class="fa" />
+						<Label row="0" col="1" text="Browse" class="p-r-10" />
+					</GridLayout>
+
+					<GridLayout columns="auto, *" class="sidedrawer-list-item"
+					 title="Search" >
+						<Label row="0" col="0" text="&#xf002;" class="fa" />
+						<Label row="0" col="1" text="Search" class="p-r-10" />
+					</GridLayout>
+
+					<!-- GridLayout columns="auto, *" class="sidedrawer-list-item"
+					 title="Featured" tap="onNavigationItemTap" -->
+					<GridLayout columns="auto, *" class="sidedrawer-list-item"
+					 	title="Featured">
+						<Label row="0" col="0" text="&#xf005;" class="fa" />
+						<Label row="0" col="1" text="Featured" class="p-r-10" />
+					</GridLayout>
+
+					<StackLayout class="hr-light"></StackLayout>
+
+					<GridLayout columns="auto, *" class="sidedrawer-list-item"
+					 title="Logout" tap="onLogoutTap">
+						<Label row="0" col="0" text="&#xf013;" class="fa" />
+						<Label row="0" col="1" text="Logout" class="p-r-10" />
+					</GridLayout>
+				</StackLayout>
+			</ScrollView>
+		</GridLayout>
+	</nsDrawer:RadSideDrawer.drawerContent>
+
+	<nsDrawer:RadSideDrawer.mainContent>
+        
+        <!-- root frame -->
+		<Frame defaultPage="sign-in/signin-page" id="topmost"></Frame>
+	
+    </nsDrawer:RadSideDrawer.mainContent>
+</nsDrawer:RadSideDrawer>

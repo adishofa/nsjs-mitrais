@@ -2,7 +2,7 @@ const application = require("application");
 require("./bundle-config");
 require("./shared/firebase.common");
 
-application.run({ moduleName: "app-root" });
+application.run({ moduleName: "app-root/app-root" });
 
 /*
 Do not place any code after the application has been started as it will not

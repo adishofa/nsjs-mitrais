@@ -1,5 +1,5 @@
 const listViewModel = require("./list-view-model");
-const topmost = require("tns-core-modules/ui/frame").topmost;
+const topmost = require("ui/frame").topmost;
 
 function onNavigatingTo(args) {
     const page = args.object;
@@ -41,23 +41,6 @@ function onItemTap(args) {
     });
 }
 
-function onLogoutTap() {
-    let viewModel = new listViewModel();
-    viewModel.logout();
-    setTimeout( function () {
-        topmost().navigate({
-            moduleName: "sign-in/signin-page",
-            animated: true,
-            transition: {
-                name: "slideTop",
-                duration: 200,
-                curve: "ease"
-            }
-        });
-    }, 1000);
-    
-}
-
 function onFabTap() {
     topmost().navigate({
         moduleName: "cars/add/adding-page",
@@ -73,5 +56,4 @@ function onFabTap() {
 exports.onNavigatingTo = onNavigatingTo;
 exports.onNavigatingFrom = onNavigatingFrom;
 exports.onItemTap = onItemTap;
-exports.onLogoutTap = onLogoutTap;
 exports.onFabTap = onFabTap;
