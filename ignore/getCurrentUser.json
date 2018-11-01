@@ -1,0 +1,27 @@
+{
+    "currentUser": {
+        "uid": "uvbeamkZ3lXhkAkzh356q65gly02",
+        "name": "Adi Hafiduh",
+        "email": "adihafiduh@gmail.com",
+        "emailVerified": "false",
+        "providers": [{
+            "id": "firebase"
+            }, {
+            "id": "password"
+        }],
+        "anonymous": "false",
+        "isAnonymous": "false",
+        "phoneNumber": null,
+        "profileImageURL": "https://firebasestorage.googleapis.com/v0/b/nativescriptjs.appspot.com/o/cars%2FMini%20Cooper%20s.jpg?alt=media&token=9d042865-c6f6-4128-85d7-13f46cb5c6b3",
+        "metadata": {
+            "creationTimestamp": "2018-10-28T22:39:47.000Z",
+            "lastSignInTimestamp": "2018-11-01T06:54:52.000Z"
+        },
+        "additionalUserInfo": {
+            "providerId": null,
+            "username": null,
+            "isNewUser": false,
+            "profile": null
+        }
+    }
+}

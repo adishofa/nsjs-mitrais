@@ -54,6 +54,8 @@
                 <Span text="{{ isLoggingIn ? 'Sign up' : '' }}" class="bold" />
             </FormattedString>
         </Label>
+
+        <ActivityIndicator busy="{{ isLoading }}" />
     </FlexboxLayout>
 
 </Page>

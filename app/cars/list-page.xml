@@ -61,7 +61,6 @@
 
         <ActivityIndicator busy="{{ isLoading }}" />
 
-
         <AbsoluteLayout tap="onFabTap" marginTop="87%" marginLeft="80%">
             <StackLayout class="fab-button">
                 <GridLayout rows="2, auto" horizontalAlignment="center" class="fab-icon">

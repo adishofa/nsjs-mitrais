@@ -24,7 +24,9 @@ function AppRootViewModel() {
     });
 
     SelectedPageService.getInstance().selectedPage$
-    .subscribe((selectedPage) => { viewModel.selectedPage = selectedPage; });
+        .subscribe((selectedPage) => { 
+            viewModel.selectedPage = selectedPage; 
+        });
 
     return viewModel;
 }

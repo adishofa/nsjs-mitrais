@@ -8,6 +8,7 @@ function signinViewModel() {
         email: "",
         password: "",
         confirmPassword: "",
+        isLoading: false,
         isLoggingIn: true,
         _userService: userService.getInstance(),
         toggleForm: function () {
@@ -28,13 +29,20 @@ function signinViewModel() {
         },
 
         login: function () {
+            this.set("isLoading", true);
+
             this._userService.login({
                 email: this.email,
                 password: this.password
             }).then(() => {
                 topmost().navigate("cars/list-page");
             })
+            .then(() => {
+                this.set("isLoading", false);
+            })
             .catch((err) => {
+                this.set("isLoading", false);
+
                 alert("Unfortunately we could not find your account." + err);
             });
         },

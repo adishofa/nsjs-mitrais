@@ -5,7 +5,6 @@ const AppRootViewModel = require("./app-root-view-model");
 
 function onLoaded(args) {
     const drawerComponent = args.object;
-    console.log(drawerComponent);
     drawerComponent.bindingContext = new AppRootViewModel();
 }
 
@@ -29,6 +28,8 @@ function onNavigationItemTap(args) {
 }
 
 function onLogoutTap() {
+    const drawerComponent = application.getRootView();
+    drawerComponent.closeDrawer();
     let viewModel = new AppRootViewModel();
     viewModel.logout();
     setTimeout(() => {

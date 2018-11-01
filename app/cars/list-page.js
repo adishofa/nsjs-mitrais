@@ -12,6 +12,8 @@ function onNavigatingTo(args) {
     }
 
     viewModel.load();
+    // viewModel.currentUser();
+    // viewModel.updateProfile();
 }
 
 function onNavigatingFrom(args) {

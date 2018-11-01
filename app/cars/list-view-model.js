@@ -3,6 +3,7 @@ const ObservableArray = require("data/observable-array").ObservableArray;
 const finalize = require("rxjs/operators").finalize;
 
 const carService = require("./shared/car-service");
+const userService = require("~/shared/services/user-service");
 
 function listViewModel() {
     const viewModel = fromObject({
@@ -10,6 +11,7 @@ function listViewModel() {
         isLoading: false,
 
         _carService: carService.getInstance(),
+        _userService: userService.getInstance(),
         _subscription: null,
 
         load: function () {
@@ -30,6 +32,14 @@ function listViewModel() {
                 this._subscription.unsubscribe();
                 this._subscription = null;
             }
+        },
+
+        // for testing
+        currentUser: function () {
+            this._userService.getCurrentUser();
+        },
+        updateProfile: function () {
+            this._userService.updateProfile();
         }
     });
 
